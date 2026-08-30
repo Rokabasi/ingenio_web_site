@@ -26,16 +26,28 @@ type MediaFrameProps = {
   src: string;
   alt: string;
   className?: string;
+  imageClassName?: string;
 };
 
-export function MediaFrame({ src, alt, className = "" }: MediaFrameProps) {
+export function MediaFrame({
+  src,
+  alt,
+  className = "",
+  imageClassName = "",
+}: MediaFrameProps) {
+  const hasSize =
+    /\b(aspect-|h-|min-h-|max-h-|w-|max-w-)/.test(className);
+  const defaultSize = hasSize ? "" : "aspect-[4/3]";
+
   return (
-    <div className={`relative aspect-[4/3] overflow-hidden bg-navy ${className}`}>
+    <div
+      className={`relative overflow-hidden bg-navy ${defaultSize} ${className}`}
+    >
       <Image
         src={src}
         alt={alt}
         fill
-        className="object-cover object-center"
+        className={`object-cover object-center ${imageClassName}`}
         sizes="(max-width: 768px) 100vw, 50vw"
       />
     </div>

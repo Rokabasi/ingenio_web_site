@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { CtaBand } from "@/components/CtaBand";
-import { MediaBand, MediaFrame } from "@/components/Media";
+import { MediaFrame } from "@/components/Media";
 import { PageHero } from "@/components/PageHero";
 import { domains } from "@/data/domains";
 import { site } from "@/data/site";
@@ -11,15 +11,30 @@ export const metadata: Metadata = {
   description: `Domaines d’expertise et projets réalisés — ${site.slogan}`,
 };
 
-const domainImages: Record<string, string> = {
-  "btp-genie-civil": "/images/hero-btp.jpg",
-  environnement: "/images/environnement.jpg",
-  energies: "/images/energie.jpg",
-  assainissement: "/images/environnement.jpg",
-  "sig-cartographie": "/images/projets.jpg",
-  "hse-qhse": "/images/entreprise.jpg",
-  "conseil-etudes": "/images/entreprise.jpg",
+const domainImages: Record<
+  string,
+  { src: string; imageClassName?: string }
+> = {
+  "btp-genie-civil": {
+    src: "/images/hero-btp.jpg",
+    imageClassName: "object-[center_42%]",
+  },
+  environnement: { src: "/images/environnement.jpg" },
+  energies: { src: "/images/energie.jpg" },
+  assainissement: {
+    src: "/images/environnement.jpg",
+    imageClassName: "object-[center_65%]",
+  },
+  "sig-cartographie": {
+    src: "/images/projets.jpg",
+    imageClassName: "object-[center_38%]",
+  },
+  "hse-qhse": { src: "/images/formations.jpg" },
+  "conseil-etudes": { src: "/images/entreprise.jpg" },
 };
+
+const domainImageFrame =
+  "aspect-[3/2] w-full ring-1 ring-[var(--line)] shadow-[0_10px_32px_rgba(21,36,71,0.08)]";
 
 const projects = [
   {
@@ -54,6 +69,76 @@ const projects = [
   },
 ];
 
+function DomainContent({
+  domain,
+  compact = false,
+}: {
+  domain: (typeof domains)[number];
+  compact?: boolean;
+}) {
+  return (
+    <div className="min-w-0">
+      <p className="text-xs font-semibold uppercase tracking-[0.16em] text-green">
+        {domain.eyebrow}
+      </p>
+      <h3
+        className={`banner-title font-display mt-2 font-bold text-ink ${
+          compact ? "text-xl sm:text-2xl" : "text-2xl sm:text-3xl lg:text-4xl"
+        }`}
+      >
+        {domain.title}
+      </h3>
+      <p
+        className={`mt-3 text-stone ${compact ? "max-w-xl text-sm sm:text-base" : "max-w-2xl text-base sm:text-lg"}`}
+      >
+        {domain.summary}
+      </p>
+      <Link
+        href={`/domaines/${domain.slug}`}
+        className="mt-5 inline-flex text-sm font-semibold uppercase tracking-[0.12em] text-navy hover:text-navy-mid"
+      >
+        Voir le domaine →
+      </Link>
+
+      {domain.services.length > 0 ? (
+        <ul
+          className={`mt-6 grid gap-2.5 ${compact ? "sm:grid-cols-2" : "sm:grid-cols-2 lg:grid-cols-2"}`}
+        >
+          <li>
+            <Link
+              href={`/domaines/${domain.slug}`}
+              className="block border border-[var(--line)] bg-white/80 px-3.5 py-2.5 text-sm font-medium text-ink transition hover:border-navy/30 hover:bg-white"
+            >
+              Présentation
+            </Link>
+          </li>
+          {domain.services.map((service) => (
+            <li key={service.slug}>
+              <Link
+                href={`/domaines/${domain.slug}/${service.slug}`}
+                className="block border border-[var(--line)] bg-white/80 px-3.5 py-2.5 text-sm font-medium text-ink transition hover:border-navy/30 hover:bg-white"
+              >
+                {service.title}
+              </Link>
+            </li>
+          ))}
+        </ul>
+      ) : (
+        <ul className="mt-6 grid gap-2.5 sm:grid-cols-2">
+          {domain.highlights.map((item) => (
+            <li
+              key={item}
+              className="border-l-2 border-crimson bg-white/70 px-3.5 py-2.5 text-sm text-ink"
+            >
+              {item}
+            </li>
+          ))}
+        </ul>
+      )}
+    </div>
+  );
+}
+
 export default function ExpertisePage() {
   return (
     <>
@@ -67,13 +152,7 @@ export default function ExpertisePage() {
         ]}
       />
 
-      <MediaBand
-        src="/images/projets.jpg"
-        alt="Expertise ingénierie et projets"
-        className="h-40 sm:h-52 lg:h-60"
-      />
-
-      <section className="mx-auto max-w-7xl px-4 py-16 sm:px-6 lg:px-8">
+      <section className="mx-auto max-w-7xl px-4 py-14 sm:px-6 sm:py-16 lg:px-8 lg:py-20">
         <p className="text-xs font-semibold uppercase tracking-[0.2em] text-green">
           Nos domaines
         </p>
@@ -85,74 +164,54 @@ export default function ExpertisePage() {
           jusqu’à l’équipe mobilisée, pour répondre aux enjeux techniques,
           environnementaux et énergétiques de vos projets.
         </p>
-
-        <div className="mt-14 space-y-16">
-          {domains.map((domain, index) => (
-            <article
-              key={domain.slug}
-              id={domain.slug}
-              className="scroll-mt-28 border-t border-[var(--line)] pt-10"
-            >
-              <div className="grid items-start gap-8 lg:grid-cols-[280px_1fr] lg:gap-12">
-                <MediaFrame
-                  src={domainImages[domain.slug] ?? "/images/entreprise.jpg"}
-                  alt={domain.shortTitle}
-                  className={`aspect-[4/3] ${index % 2 === 1 ? "lg:order-2" : ""}`}
-                />
-                <div className={index % 2 === 1 ? "lg:order-1" : undefined}>
-                  <p className="text-xs font-semibold uppercase tracking-[0.16em] text-green">
-                    {domain.eyebrow}
-                  </p>
-                  <h3 className="banner-title font-display mt-2 text-2xl font-bold text-ink sm:text-3xl">
-                    {domain.title}
-                  </h3>
-                  <p className="mt-3 max-w-3xl text-stone">{domain.summary}</p>
-                  <Link
-                    href={`/domaines/${domain.slug}`}
-                    className="mt-4 inline-flex text-sm font-semibold uppercase tracking-[0.12em] text-navy hover:text-navy-mid"
-                  >
-                    Voir le domaine →
-                  </Link>
-
-                  {domain.services.length > 0 ? (
-                    <ul className="mt-8 grid gap-3 sm:grid-cols-2">
-                      <li>
-                        <Link
-                          href={`/domaines/${domain.slug}`}
-                          className="block border border-[var(--line)] bg-white/70 px-4 py-3 text-sm font-medium text-ink transition hover:border-navy/30 hover:bg-white"
-                        >
-                          Présentation
-                        </Link>
-                      </li>
-                      {domain.services.map((service) => (
-                        <li key={service.slug}>
-                          <Link
-                            href={`/domaines/${domain.slug}/${service.slug}`}
-                            className="block border border-[var(--line)] bg-white/70 px-4 py-3 text-sm font-medium text-ink transition hover:border-navy/30 hover:bg-white"
-                          >
-                            {service.title}
-                          </Link>
-                        </li>
-                      ))}
-                    </ul>
-                  ) : (
-                    <ul className="mt-8 grid gap-3 sm:grid-cols-2">
-                      {domain.highlights.map((item) => (
-                        <li
-                          key={item}
-                          className="border-l-2 border-crimson bg-white/60 px-4 py-3 text-sm text-ink"
-                        >
-                          {item}
-                        </li>
-                      ))}
-                    </ul>
-                  )}
-                </div>
-              </div>
-            </article>
-          ))}
-        </div>
       </section>
+
+      {domains.map((domain, index) => {
+        const featured = index % 2 === 0;
+        const image = domainImages[domain.slug] ?? {
+          src: "/images/entreprise.jpg",
+        };
+
+        return (
+          <article
+            key={domain.slug}
+            id={domain.slug}
+            className={`scroll-mt-28 border-t border-[var(--line)] ${
+              featured ? "bg-white/60" : "bg-sand/45"
+            }`}
+          >
+            <div
+              className={`mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 ${
+                featured ? "py-12 sm:py-16 lg:py-20" : "py-10 sm:py-12 lg:py-14"
+              }`}
+            >
+              {featured ? (
+                <div className="grid items-center gap-8 lg:grid-cols-2 lg:gap-14">
+                  <MediaFrame
+                    src={image.src}
+                    alt={domain.shortTitle}
+                    imageClassName={image.imageClassName}
+                    className={domainImageFrame}
+                  />
+                  <DomainContent domain={domain} />
+                </div>
+              ) : (
+                <div className="grid items-center gap-8 lg:grid-cols-[1fr_280px] lg:gap-12">
+                  <DomainContent domain={domain} compact />
+                  <div className="mx-auto w-full max-w-[280px] lg:mx-0 lg:max-w-none">
+                    <MediaFrame
+                      src={image.src}
+                      alt={domain.shortTitle}
+                      imageClassName={image.imageClassName}
+                      className={domainImageFrame}
+                    />
+                  </div>
+                </div>
+              )}
+            </div>
+          </article>
+        );
+      })}
 
       <section className="border-y border-[var(--line)] bg-white/50">
         <div className="mx-auto max-w-7xl px-4 py-16 sm:px-6 lg:px-8">
@@ -175,7 +234,7 @@ export default function ExpertisePage() {
                 <MediaFrame
                   src={project.image}
                   alt={project.title}
-                  className="aspect-[16/10]"
+                  className={`${domainImageFrame} aspect-[3/2]`}
                 />
                 <div className="p-5">
                   <p className="text-xs font-semibold uppercase tracking-[0.16em] text-moss">
