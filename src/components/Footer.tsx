@@ -36,7 +36,7 @@ export function Footer() {
     <footer className="mt-auto border-t border-white/10 bg-navy-deep text-sand">
       <div className="mx-auto grid max-w-7xl gap-10 px-4 py-10 sm:px-6 sm:py-14 lg:grid-cols-[1.3fr_2fr] lg:px-8">
         <div>
-          <BrandLogo />
+          <BrandLogo size="footer" />
           <p className="mt-5 max-w-sm text-base font-medium leading-relaxed text-white">
             {site.slogan}
           </p>

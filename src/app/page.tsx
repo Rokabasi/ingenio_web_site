@@ -1,8 +1,10 @@
+import Image from "next/image";
 import Link from "next/link";
 import { CtaBand } from "@/components/CtaBand";
 import { DomainCard } from "@/components/Content";
 import { domains } from "@/data/domains";
 import {
+  aboutApproach,
   aboutIntro,
   aboutObjective,
   mission,
@@ -21,23 +23,49 @@ const stats = [
 export default function HomePage() {
   return (
     <>
-      <section className="relative min-h-[92svh] hero-mesh text-sand sm:min-h-[100svh]">
-        <div className="pointer-events-none absolute inset-0 grid-overlay opacity-45" />
-        <div className="relative mx-auto flex min-h-[92svh] max-w-7xl flex-col justify-center px-4 py-16 sm:min-h-[100svh] sm:px-6 sm:py-28 lg:px-8 lg:py-32">
+      <section className="relative min-h-[88svh] overflow-hidden text-white sm:min-h-[92svh] lg:min-h-[85vh]">
+        <div className="absolute inset-0">
+          <Image
+            src="/images/hero-btp.jpg"
+            alt=""
+            fill
+            priority
+            className="object-cover object-[center_32%]"
+            sizes="100vw"
+          />
+        </div>
+        <div
+          className="absolute inset-0 bg-navy-deep/35"
+          aria-hidden
+        />
+        <div
+          className="pointer-events-none absolute inset-0 bg-gradient-to-r from-navy-deep/88 via-navy/58 to-navy-deep/25"
+          aria-hidden
+        />
+        <div
+          className="pointer-events-none absolute inset-0 bg-gradient-to-t from-navy-deep/80 via-transparent to-navy-deep/45"
+          aria-hidden
+        />
+
+        <div className="relative z-10 mx-auto flex min-h-[88svh] max-w-7xl flex-col justify-center px-4 py-16 sm:min-h-[92svh] sm:px-6 sm:py-24 lg:min-h-[85vh] lg:px-8 lg:py-28">
           <div className="max-w-3xl">
-            <p className="reveal text-[0.65rem] font-semibold uppercase tracking-[0.18em] text-crimson-soft sm:text-xs sm:tracking-[0.22em]">
+            <p className="text-[0.65rem] font-semibold uppercase tracking-[0.18em] text-crimson-soft sm:text-xs sm:tracking-[0.22em]">
               République Démocratique du Congo · Depuis {site.founded}
             </p>
-            <h1 className="reveal reveal-delay-1 banner-title font-display mt-4 text-[2rem] font-extrabold text-white sm:mt-5 sm:text-5xl lg:text-6xl">
+            <h1 className="banner-title font-display mt-4 text-[2rem] font-extrabold text-white sm:mt-5 sm:text-5xl lg:text-6xl">
               INGENIO
-              <span className="mt-2 block text-xl font-semibold uppercase tracking-[0.14em] text-white/85 sm:mt-3 sm:text-3xl sm:tracking-[0.18em] lg:text-4xl">
+              <span className="mt-2 block text-xl font-semibold uppercase tracking-[0.14em] text-white/90 sm:mt-3 sm:text-3xl sm:tracking-[0.18em] lg:text-4xl">
                 Consulting SARL
               </span>
             </h1>
-            <p className="reveal reveal-delay-2 mt-5 max-w-xl text-lg font-medium leading-relaxed text-white sm:mt-7 sm:text-xl lg:text-2xl">
+            <p className="mt-5 max-w-xl text-lg font-medium leading-relaxed text-white/95 sm:mt-7 sm:text-xl lg:text-2xl">
               {site.slogan}
             </p>
-            <div className="reveal reveal-delay-3 mt-8 flex w-full flex-col gap-3 sm:mt-10 sm:w-auto sm:flex-row sm:flex-wrap">
+            <p className="mt-4 max-w-xl text-sm leading-relaxed text-white/75 sm:text-base">
+              Conseil, ingénierie et accompagnement technique pour des projets
+              durables en infrastructures, environnement, énergie et formation.
+            </p>
+            <div className="mt-8 flex w-full flex-col gap-3 sm:mt-10 sm:w-auto sm:flex-row sm:flex-wrap">
               <Link
                 href="#domaines"
                 className="inline-flex w-full items-center justify-center rounded-sm bg-crimson px-6 py-3.5 text-sm font-bold uppercase tracking-[0.12em] text-white transition hover:bg-crimson-soft sm:w-auto"
@@ -46,13 +74,13 @@ export default function HomePage() {
               </Link>
               <Link
                 href="/contact/devis"
-                className="inline-flex w-full items-center justify-center rounded-sm border border-white/35 px-6 py-3.5 text-sm font-bold uppercase tracking-[0.12em] text-white transition hover:border-white/70 sm:w-auto"
+                className="inline-flex w-full items-center justify-center rounded-sm border border-white/40 bg-white/10 px-6 py-3.5 text-sm font-bold uppercase tracking-[0.12em] text-white backdrop-blur-sm transition hover:border-white/70 hover:bg-white/15 sm:w-auto"
               >
                 Demander un devis
               </Link>
             </div>
           </div>
-          <div className="draw-line mt-10 h-1 w-full max-w-md bg-gradient-to-r from-crimson via-green to-transparent sm:mt-12" />
+          <div className="mt-10 h-1 w-full max-w-md bg-gradient-to-r from-crimson via-green to-transparent sm:mt-12" />
         </div>
       </section>
 
@@ -95,9 +123,49 @@ export default function HomePage() {
         </div>
       </section>
 
+      <section className="border-y border-[var(--line)] bg-sand/50">
+        <div className="mx-auto grid max-w-7xl items-center gap-10 px-4 py-14 sm:px-6 lg:grid-cols-2 lg:gap-16 lg:px-8 lg:py-20">
+          <div className="relative aspect-[16/10] min-h-[220px] overflow-hidden bg-navy sm:min-h-[280px] lg:min-h-0 lg:aspect-[4/3]">
+            <Image
+              src="/images/entreprise.jpg"
+              alt="Équipe et projets d’ingénierie Ingenio Consulting"
+              fill
+              className="object-cover object-center"
+              sizes="(max-width: 1024px) 100vw, 640px"
+            />
+            <div
+              className="pointer-events-none absolute inset-0 bg-gradient-to-t from-navy-deep/35 via-transparent to-transparent"
+              aria-hidden
+            />
+          </div>
+          <div>
+            <p className="text-xs font-semibold uppercase tracking-[0.22em] text-green">
+              Notre approche
+            </p>
+            <h2 className="banner-title font-display mt-3 text-3xl font-bold text-ink sm:text-4xl">
+              Des projets concrets, une expertise terrain
+            </h2>
+            <p className="mt-5 text-lg leading-relaxed text-ink/85">
+              {aboutApproach}
+            </p>
+            <p className="mt-4 text-base leading-relaxed text-stone">
+              BTP, environnement, énergie, assainissement, géomatique, HSE et
+              formation : nous mobilisons les bonnes compétences pour chaque
+              enjeu.
+            </p>
+            <Link
+              href="/expertise"
+              className="mt-8 inline-flex w-full items-center justify-center rounded-sm bg-navy px-5 py-3 text-sm font-bold uppercase tracking-[0.1em] text-white hover:bg-navy-mid sm:w-auto"
+            >
+              Découvrir l’expertise
+            </Link>
+          </div>
+        </div>
+      </section>
+
       <section
         id="domaines"
-        className="scroll-mt-24 border-y border-[var(--line)] bg-white/40"
+        className="scroll-mt-24 border-b border-[var(--line)] bg-white/40"
       >
         <div className="mx-auto max-w-7xl px-4 py-20 sm:px-6 lg:px-8 lg:py-24">
           <div className="flex flex-col gap-4 sm:flex-row sm:items-end sm:justify-between">
