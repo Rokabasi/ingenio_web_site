@@ -41,7 +41,7 @@ export function MediaFrame({
 
   return (
     <div
-      className={`relative overflow-hidden bg-navy ${defaultSize} ${className}`}
+      className={`relative max-w-full min-w-0 overflow-hidden bg-navy ${defaultSize} ${className}`}
     >
       <Image
         src={src}

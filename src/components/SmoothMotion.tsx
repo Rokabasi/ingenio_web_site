@@ -129,7 +129,7 @@ export function SmoothMotion({ children }: { children: React.ReactNode }) {
           </div>
         </div>
       ) : null}
-      <div className={`site-frame ${ready ? "is-ready" : "is-pending"}`}>
+      <div className={`site-frame w-full max-w-full overflow-x-clip ${ready ? "is-ready" : "is-pending"}`}>
         {children}
       </div>
     </>

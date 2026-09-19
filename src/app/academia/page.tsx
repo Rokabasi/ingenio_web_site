@@ -32,6 +32,7 @@ const sections = [
     cta: "Voir les formations",
     image: "/images/formation.jpeg",
     alt: "Formations Ingenio Academia",
+    imageClassName: "object-[center_72%]",
   },
   {
     id: "stages",
@@ -42,6 +43,7 @@ const sections = [
     cta: "Découvrir les stages",
     image: "/images/stage.jpeg",
     alt: "Stages Ingenio Academia",
+    imageClassName: "object-[32%_58%]",
   },
   {
     id: "formateurs",
@@ -52,18 +54,13 @@ const sections = [
     cta: "Rencontrer les formateurs",
     image: "/images/formateur.jpeg",
     alt: "Formateurs Ingenio Academia",
+    imageClassName: "object-[center_22%]",
+    portrait: true,
   },
-  // {
-  //   id: "espace-apprenant",
-  //   eyebrow: "Espace apprenant",
-  //   title: "Suivre son parcours en ligne",
-  //   text: "Un espace numérique dédié aux apprenants pour consulter le parcours de formation, les sessions suivies, les attestations et certificats.",
-  //   href: "/academia/espace-apprenant",
-  //   cta: "Accéder à l’espace",
-  //   image: "/images/academia.jpg",
-  //   alt: "Espace apprenant Academia",
-  // },
 ];
+
+const frameBase =
+  "w-full max-w-full min-w-0 ring-1 ring-[var(--line)] shadow-[0_10px_28px_rgba(21,36,71,0.08)]";
 
 export default function AcademiaPage() {
   return (
@@ -78,18 +75,18 @@ export default function AcademiaPage() {
         ]}
       />
 
-      <section className="mx-auto max-w-7xl px-4 py-16 sm:px-6 lg:px-8">
-        <p className="max-w-3xl text-lg leading-relaxed text-ink/85">
+      <section className="mx-auto max-w-7xl px-4 py-10 sm:px-6 sm:py-16 lg:px-8 lg:py-20">
+        <p className="max-w-3xl text-base leading-relaxed text-ink/85 sm:text-lg">
           Ingenio Academia propose des formations, stages et programmes de
           perfectionnement destinés aux étudiants, professionnels, entreprises
           et institutions — avec un portail apprenant et une vérification
           numérique des certificats.
         </p>
-        <ul className="mt-10 grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
+        <ul className="mt-8 grid gap-2.5 sm:mt-10 sm:grid-cols-2 sm:gap-3 lg:grid-cols-3">
           {topics.map((topic) => (
             <li
               key={topic}
-              className="border-l-2 border-green bg-white/60 px-4 py-3 text-ink"
+              className="border-l-2 border-green bg-white/60 px-3.5 py-2.5 text-sm text-ink sm:px-4 sm:py-3 sm:text-base"
             >
               {topic}
             </li>
@@ -97,61 +94,81 @@ export default function AcademiaPage() {
         </ul>
       </section>
 
-      {sections.map((block, index) => (
-        <section
-          key={block.id}
-          id={block.id}
-          className={`scroll-mt-24 ${
-            index % 2 === 0 ? "bg-white/50" : "bg-sand/40"
-          }`}
-        >
-          <div className="mx-auto grid max-w-7xl items-center gap-8 px-4 py-12 sm:gap-10 sm:px-6 sm:py-16 lg:grid-cols-2 lg:gap-14 lg:px-8 lg:py-16">
-            <div className={index % 2 === 1 ? "lg:order-2" : undefined}>
-              <p className="text-xs font-semibold uppercase tracking-[0.2em] text-green">
-                {block.eyebrow}
-              </p>
-              <h2 className="banner-title font-display mt-3 text-2xl font-bold text-ink sm:text-3xl">
-                {block.title}
-              </h2>
-              <p className="mt-5 text-lg leading-relaxed text-ink/80">
-                {block.text}
-              </p>
-              <Link
-                href={block.href}
-                className="mt-8 inline-flex w-full items-center justify-center rounded-sm bg-navy px-5 py-3 text-sm font-bold uppercase tracking-[0.1em] text-white hover:bg-navy-mid sm:w-auto"
+      {sections.map((block, index) => {
+        const imageLeft = index % 2 === 0;
+        const aspect = block.portrait
+          ? "aspect-[4/5] max-h-[420px] sm:max-h-none sm:aspect-[5/6] lg:aspect-[4/5]"
+          : "aspect-[3/2]";
+
+        return (
+          <section
+            key={block.id}
+            id={block.id}
+            className={`scroll-mt-24 border-t border-[var(--line)] ${
+              imageLeft ? "bg-white/55" : "bg-sand/45"
+            }`}
+          >
+            <div className="mx-auto grid max-w-7xl items-center gap-6 px-4 py-10 sm:gap-10 sm:px-6 sm:py-16 lg:grid-cols-2 lg:gap-14 lg:px-8 lg:py-20">
+              <div
+                className={`relative min-w-0 ${imageLeft ? "lg:order-1" : "lg:order-2"}`}
               >
-                {block.cta}
-              </Link>
+                <MediaFrame
+                  src={block.image}
+                  alt={block.alt}
+                  imageClassName={block.imageClassName}
+                  className={`${frameBase} ${aspect}`}
+                />
+              </div>
+
+              <div className={`min-w-0 ${imageLeft ? "lg:order-2" : "lg:order-1"}`}>
+                <p className="text-[0.65rem] font-semibold uppercase tracking-[0.16em] text-green sm:text-xs sm:tracking-[0.2em]">
+                  {block.eyebrow}
+                </p>
+                <h2 className="banner-title font-display mt-2.5 text-[1.35rem] font-bold text-ink sm:mt-3 sm:text-3xl">
+                  {block.title}
+                </h2>
+                <p className="mt-3.5 max-w-xl text-[0.9375rem] leading-relaxed text-ink/80 sm:mt-5 sm:text-lg">
+                  {block.text}
+                </p>
+                <Link
+                  href={block.href}
+                  className="mt-6 inline-flex w-full items-center justify-center rounded-sm bg-navy px-5 py-3 text-xs font-bold uppercase tracking-[0.08em] text-white hover:bg-navy-mid sm:mt-8 sm:w-auto sm:text-sm sm:tracking-[0.1em]"
+                >
+                  {block.cta}
+                </Link>
+              </div>
             </div>
+          </section>
+        );
+      })}
+
+      <section
+        id="certificats"
+        className="scroll-mt-24 border-y border-[var(--line)] bg-white/55"
+      >
+        <div className="mx-auto grid max-w-7xl items-center gap-6 px-4 py-10 sm:gap-10 sm:px-6 sm:py-16 lg:grid-cols-2 lg:gap-14 lg:px-8 lg:py-20">
+          <div className="relative min-w-0 lg:order-1">
             <MediaFrame
-              src={block.image}
-              alt={block.alt}
-              className={index % 2 === 1 ? "lg:order-1" : undefined}
+              src="/images/certificat.jpeg"
+              alt="Certificats Ingenio Academia"
+              imageClassName="object-[center_38%]"
+              className={`${frameBase} aspect-[3/2]`}
             />
           </div>
-        </section>
-      ))}
-
-      <section id="certificats" className="scroll-mt-24 border-y border-[var(--line)]">
-        <div className="mx-auto grid max-w-7xl items-center gap-10 px-4 py-16 sm:px-6 lg:grid-cols-2 lg:gap-14 lg:px-8">
-          <MediaFrame
-            src="/images/certificat.jpeg"
-            alt="Certificats Ingenio Academia"
-          />
-          <div>
-            <p className="text-xs font-semibold uppercase tracking-[0.2em] text-green">
+          <div className="min-w-0 lg:order-2">
+            <p className="text-[0.65rem] font-semibold uppercase tracking-[0.16em] text-green sm:text-xs sm:tracking-[0.2em]">
               Certificats
             </p>
-            <h2 className="banner-title font-display mt-3 text-2xl font-bold text-ink sm:text-3xl">
+            <h2 className="banner-title font-display mt-2.5 text-[1.35rem] font-bold text-ink sm:mt-3 sm:text-3xl">
               Attestations et certificats délivrés
             </h2>
-            <p className="mt-5 text-lg leading-relaxed text-ink/80">
+            <p className="mt-3.5 max-w-xl text-[0.9375rem] leading-relaxed text-ink/80 sm:mt-5 sm:text-lg">
               À l’issue des formations et programmes validés, Ingenio Academia
               délivre des attestations et certificats authentifiables.
             </p>
             <Link
               href="/academia/certificats"
-              className="mt-8 inline-flex w-full items-center justify-center rounded-sm bg-navy px-5 py-3 text-sm font-bold uppercase tracking-[0.1em] text-white hover:bg-navy-mid sm:w-auto"
+              className="mt-6 inline-flex w-full items-center justify-center rounded-sm bg-navy px-5 py-3 text-xs font-bold uppercase tracking-[0.08em] text-white hover:bg-navy-mid sm:mt-8 sm:w-auto sm:text-sm sm:tracking-[0.1em]"
             >
               En savoir plus
             </Link>
@@ -160,16 +177,16 @@ export default function AcademiaPage() {
       </section>
 
       <section id="verification" className="scroll-mt-24 bg-mist">
-        <div className="mx-auto max-w-7xl px-4 py-16 sm:px-6 lg:px-8">
-          <div className="grid gap-10 lg:grid-cols-[1fr_1fr] lg:items-start lg:gap-14">
-            <div>
-              <p className="text-xs font-semibold uppercase tracking-[0.2em] text-green">
+        <div className="mx-auto max-w-7xl px-4 py-10 sm:px-6 sm:py-16 lg:px-8 lg:py-20">
+          <div className="grid gap-8 lg:grid-cols-[1fr_1fr] lg:items-start lg:gap-14">
+            <div className="min-w-0">
+              <p className="text-[0.65rem] font-semibold uppercase tracking-[0.16em] text-green sm:text-xs sm:tracking-[0.2em]">
                 Vérification QR
               </p>
-              <h2 className="banner-title font-display mt-3 text-2xl font-bold text-ink sm:text-3xl">
+              <h2 className="banner-title font-display mt-2.5 text-[1.35rem] font-bold text-ink sm:mt-3 sm:text-3xl">
                 Authentifier un certificat
               </h2>
-              <p className="mt-5 text-lg leading-relaxed text-ink/80">
+              <p className="mt-3.5 text-[0.9375rem] leading-relaxed text-ink/80 sm:mt-5 sm:text-lg">
                 Vérifiez l’authenticité d’un certificat ou d’une attestation
                 délivré(e) par Ingenio Academia via le code figurant sur le
                 document.

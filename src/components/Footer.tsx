@@ -34,10 +34,10 @@ const footerLinks = [
 export function Footer() {
   return (
     <footer className="mt-auto border-t border-white/10 bg-navy-deep text-sand">
-      <div className="mx-auto grid max-w-7xl gap-10 px-4 py-10 sm:px-6 sm:py-14 lg:grid-cols-[1.3fr_2fr] lg:px-8">
-        <div>
+      <div className="mx-auto grid max-w-7xl gap-8 px-4 py-8 sm:gap-10 sm:px-6 sm:py-14 lg:grid-cols-[1.3fr_2fr] lg:px-8">
+        <div className="min-w-0">
           <BrandLogo size="footer" />
-          <p className="mt-5 max-w-sm text-base font-medium leading-relaxed text-white">
+          <p className="mt-4 max-w-sm text-sm font-medium leading-relaxed text-white sm:mt-5 sm:text-base">
             {site.slogan}
           </p>
           <p className="mt-3 max-w-sm text-sm leading-relaxed text-white/65">

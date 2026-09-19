@@ -69,7 +69,7 @@ export default function EntreprisePage() {
             <p className="text-xs font-semibold uppercase tracking-[0.2em] text-green">
               À propos
             </p>
-            <h2 className="banner-title font-display mt-3 text-3xl font-bold text-ink">
+            <h2 className="banner-title font-display mt-3 text-[1.35rem] font-bold text-ink sm:text-3xl">
               Une société congolaise d’ingénierie et de conseil
             </h2>
             <ContentProse className="mt-6">
@@ -95,7 +95,7 @@ export default function EntreprisePage() {
           <p className="text-xs font-semibold uppercase tracking-[0.2em] text-green">
             Vision & Mission
           </p>
-          <h2 className="banner-title font-display mt-3 text-3xl font-bold text-ink">
+          <h2 className="banner-title font-display mt-3 text-[1.35rem] font-bold text-ink sm:text-3xl">
             Ce qui guide nos interventions
           </h2>
           <div className="mt-10 grid gap-8 lg:grid-cols-2">
@@ -146,7 +146,7 @@ export default function EntreprisePage() {
             <p className="text-xs font-semibold uppercase tracking-[0.2em] text-green">
               Domaines d’intervention
             </p>
-            <h2 className="banner-title font-display mt-3 text-3xl font-bold text-ink">
+            <h2 className="banner-title font-display mt-3 text-[1.35rem] font-bold text-ink sm:text-3xl">
               Une offre intégrée
             </h2>
             <p className="mt-4 max-w-2xl text-ink/80">
@@ -191,7 +191,7 @@ export default function EntreprisePage() {
               <p className="text-xs font-semibold uppercase tracking-[0.2em] text-green">
                 Organisation
               </p>
-              <h2 className="banner-title font-display mt-3 text-3xl font-bold text-ink">
+              <h2 className="banner-title font-display mt-3 text-[1.35rem] font-bold text-ink sm:text-3xl">
                 Une équipe structurée autour des projets
               </h2>
               <ContentProse className="mt-6">
@@ -206,7 +206,7 @@ export default function EntreprisePage() {
               <p className="text-xs font-semibold uppercase tracking-[0.2em] text-green">
                 Nos experts
               </p>
-              <h2 className="banner-title font-display mt-3 text-3xl font-bold text-ink">
+              <h2 className="banner-title font-display mt-3 text-[1.35rem] font-bold text-ink sm:text-3xl">
                 Une équipe pluridisciplinaire
               </h2>
               <ul className="mt-8 grid gap-3 sm:grid-cols-2">
@@ -235,7 +235,7 @@ export default function EntreprisePage() {
             <p className="text-xs font-semibold uppercase tracking-[0.2em] text-green">
               Nos partenaires
             </p>
-            <h2 className="banner-title font-display mt-3 text-3xl font-bold text-ink">
+            <h2 className="banner-title font-display mt-3 text-[1.35rem] font-bold text-ink sm:text-3xl">
               Des alliances au service de projets durables
             </h2>
             <ContentProse className="mt-6">

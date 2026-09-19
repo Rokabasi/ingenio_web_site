@@ -39,11 +39,14 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="fr" className={`${display.variable} ${body.variable} h-full`}>
-      <body className="page-shell flex min-h-full flex-col antialiased">
+    <html
+      lang="fr"
+      className={`${display.variable} ${body.variable} h-full overflow-x-clip`}
+    >
+      <body className="page-shell flex min-h-full max-w-full flex-col overflow-x-clip antialiased">
         <SmoothMotion>
           <Header />
-          <main className="flex-1">{children}</main>
+          <main className="min-w-0 flex-1">{children}</main>
           <Footer />
         </SmoothMotion>
       </body>

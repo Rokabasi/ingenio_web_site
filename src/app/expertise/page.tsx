@@ -83,13 +83,19 @@ function DomainContent({
       </p>
       <h3
         className={`banner-title font-display mt-2 font-bold text-ink ${
-          compact ? "text-xl sm:text-2xl" : "text-2xl sm:text-3xl lg:text-4xl"
+          compact
+            ? "text-[1.2rem] sm:text-2xl"
+            : "text-[1.35rem] sm:text-3xl lg:text-4xl"
         }`}
       >
         {domain.title}
       </h3>
       <p
-        className={`mt-3 text-stone ${compact ? "max-w-xl text-sm sm:text-base" : "max-w-2xl text-base sm:text-lg"}`}
+        className={`mt-2.5 text-stone sm:mt-3 ${
+          compact
+            ? "max-w-xl text-sm sm:text-base"
+            : "max-w-2xl text-[0.9375rem] sm:text-lg"
+        }`}
       >
         {domain.summary}
       </p>
@@ -156,10 +162,10 @@ export default function ExpertisePage() {
         <p className="text-xs font-semibold uppercase tracking-[0.2em] text-green">
           Nos domaines
         </p>
-        <h2 className="banner-title font-display mt-3 text-3xl font-bold text-ink sm:text-4xl">
+        <h2 className="banner-title font-display mt-3 text-[1.4rem] font-bold text-ink sm:text-4xl">
           Une offre structurée par métier
         </h2>
-        <p className="mt-4 max-w-3xl text-lg leading-relaxed text-ink/80">
+        <p className="mt-3 max-w-3xl text-base leading-relaxed text-ink/80 sm:mt-4 sm:text-lg">
           Chaque domaine regroupe des prestations ciblées, de la présentation
           jusqu’à l’équipe mobilisée, pour répondre aux enjeux techniques,
           environnementaux et énergétiques de vos projets.
@@ -218,7 +224,7 @@ export default function ExpertisePage() {
           <p className="text-xs font-semibold uppercase tracking-[0.2em] text-green">
             Réalisations
           </p>
-          <h2 className="banner-title font-display mt-3 text-3xl font-bold text-ink sm:text-4xl">
+          <h2 className="banner-title font-display mt-3 text-[1.4rem] font-bold text-ink sm:text-4xl">
             Projets réalisés
           </h2>
           <p className="mt-4 max-w-3xl text-ink/80">

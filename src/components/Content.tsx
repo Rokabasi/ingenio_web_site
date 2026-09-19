@@ -9,7 +9,7 @@ export function ContentProse({
 }) {
   return (
     <div
-      className={`space-y-5 text-[1.05rem] leading-relaxed text-ink/85 ${className}`}
+      className={`space-y-4 text-base leading-relaxed text-ink/85 sm:space-y-5 sm:text-[1.05rem] ${className}`}
     >
       {children}
     </div>
@@ -53,7 +53,7 @@ export function DomainCard({
           <p className="text-xs font-semibold uppercase tracking-[0.18em] text-green">
             {eyebrow}
           </p>
-          <h3 className="banner-title font-display mt-2 text-xl font-semibold text-ink transition group-hover:text-navy-mid sm:text-2xl lg:text-3xl">
+          <h3 className="banner-title font-display mt-2 text-lg font-semibold text-ink transition group-hover:text-navy-mid sm:text-2xl lg:text-3xl">
             {title}
           </h3>
           <p className="mt-2 text-sm text-stone sm:mt-3 sm:max-w-2xl sm:text-base">

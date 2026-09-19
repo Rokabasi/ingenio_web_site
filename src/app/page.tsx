@@ -52,29 +52,29 @@ export default function HomePage() {
             <p className="text-[0.65rem] font-semibold uppercase tracking-[0.18em] text-crimson-soft sm:text-xs sm:tracking-[0.22em]">
               République Démocratique du Congo · Depuis {site.founded}
             </p>
-            <h1 className="banner-title font-display mt-4 text-[2rem] font-extrabold text-white sm:mt-5 sm:text-5xl lg:text-6xl">
+            <h1 className="banner-title font-display mt-4 text-[1.65rem] font-extrabold text-white sm:mt-5 sm:text-5xl lg:text-6xl">
               INGENIO
-              <span className="mt-2 block text-xl font-semibold uppercase tracking-[0.14em] text-white/90 sm:mt-3 sm:text-3xl sm:tracking-[0.18em] lg:text-4xl">
+              <span className="mt-1.5 block text-base font-semibold uppercase tracking-[0.12em] text-white/90 sm:mt-3 sm:text-3xl sm:tracking-[0.18em] lg:text-4xl">
                 Consulting SARL
               </span>
             </h1>
-            <p className="mt-5 max-w-xl text-lg font-medium leading-relaxed text-white/95 sm:mt-7 sm:text-xl lg:text-2xl">
+            <p className="mt-4 max-w-xl text-base font-medium leading-relaxed text-white/95 sm:mt-7 sm:text-xl lg:text-2xl">
               {site.slogan}
             </p>
-            <p className="mt-4 max-w-xl text-sm leading-relaxed text-white/75 sm:text-base">
+            <p className="mt-3 max-w-xl text-[0.875rem] leading-relaxed text-white/75 sm:mt-4 sm:text-base">
               Conseil, ingénierie et accompagnement technique pour des projets
               durables en infrastructures, environnement, énergie et formation.
             </p>
-            <div className="mt-8 flex w-full flex-col gap-3 sm:mt-10 sm:w-auto sm:flex-row sm:flex-wrap">
+            <div className="mt-7 flex w-full flex-col gap-2.5 sm:mt-10 sm:w-auto sm:flex-row sm:flex-wrap sm:gap-3">
               <Link
                 href="#domaines"
-                className="inline-flex w-full items-center justify-center rounded-sm bg-crimson px-6 py-3.5 text-sm font-bold uppercase tracking-[0.12em] text-white transition hover:bg-crimson-soft sm:w-auto"
+                className="inline-flex w-full items-center justify-center rounded-sm bg-crimson px-5 py-3 text-xs font-bold uppercase tracking-[0.1em] text-white transition hover:bg-crimson-soft sm:w-auto sm:px-6 sm:py-3.5 sm:text-sm sm:tracking-[0.12em]"
               >
                 Nos domaines
               </Link>
               <Link
                 href="/contact/devis"
-                className="inline-flex w-full items-center justify-center rounded-sm border border-white/40 bg-white/10 px-6 py-3.5 text-sm font-bold uppercase tracking-[0.12em] text-white backdrop-blur-sm transition hover:border-white/70 hover:bg-white/15 sm:w-auto"
+                className="inline-flex w-full items-center justify-center rounded-sm border border-white/40 bg-white/10 px-5 py-3 text-xs font-bold uppercase tracking-[0.1em] text-white backdrop-blur-sm transition hover:border-white/70 hover:bg-white/15 sm:w-auto sm:px-6 sm:py-3.5 sm:text-sm sm:tracking-[0.12em]"
               >
                 Demander un devis
               </Link>
@@ -105,12 +105,12 @@ export default function HomePage() {
             <p className="text-xs font-semibold uppercase tracking-[0.22em] text-green">
               Qui sommes-nous
             </p>
-            <h2 className="banner-title font-display mt-3 text-3xl font-bold text-ink sm:text-4xl">
+            <h2 className="banner-title font-display mt-3 text-[1.4rem] font-bold text-ink sm:text-4xl">
               Une ingénierie pluridisciplinaire au service des territoires
             </h2>
             <div className="mt-6 h-1 w-20 bg-crimson" />
           </div>
-          <div className="space-y-5 text-lg leading-relaxed text-ink/85">
+          <div className="space-y-4 text-base leading-relaxed text-ink/85 sm:space-y-5 sm:text-lg">
             <p>{aboutIntro}</p>
             <p>{aboutObjective}</p>
             <Link
@@ -125,7 +125,7 @@ export default function HomePage() {
 
       <section className="border-y border-[var(--line)] bg-sand/50">
         <div className="mx-auto grid max-w-7xl items-center gap-10 px-4 py-14 sm:px-6 lg:grid-cols-2 lg:gap-16 lg:px-8 lg:py-20">
-          <div className="relative aspect-[16/10] min-h-[220px] overflow-hidden bg-navy sm:min-h-[280px] lg:min-h-0 lg:aspect-[4/3]">
+          <div className="relative aspect-[16/10] min-h-[180px] max-w-full overflow-hidden bg-navy sm:min-h-[280px] lg:min-h-0 lg:aspect-[4/3]">
             <Image
               src="/images/entreprise.jpg"
               alt="Équipe et projets d’ingénierie Ingenio Consulting"
@@ -142,10 +142,10 @@ export default function HomePage() {
             <p className="text-xs font-semibold uppercase tracking-[0.22em] text-green">
               Notre approche
             </p>
-            <h2 className="banner-title font-display mt-3 text-3xl font-bold text-ink sm:text-4xl">
+            <h2 className="banner-title font-display mt-3 text-[1.4rem] font-bold text-ink sm:text-4xl">
               Des projets concrets, une expertise terrain
             </h2>
-            <p className="mt-5 text-lg leading-relaxed text-ink/85">
+            <p className="mt-4 text-base leading-relaxed text-ink/85 sm:mt-5 sm:text-lg">
               {aboutApproach}
             </p>
             <p className="mt-4 text-base leading-relaxed text-stone">
@@ -173,7 +173,7 @@ export default function HomePage() {
               <p className="text-xs font-semibold uppercase tracking-[0.22em] text-green">
                 Expertise
               </p>
-              <h2 className="banner-title font-display mt-3 text-3xl font-bold text-ink sm:text-4xl">
+              <h2 className="banner-title font-display mt-3 text-[1.4rem] font-bold text-ink sm:text-4xl">
                 Nos domaines d’intervention
               </h2>
             </div>
@@ -204,7 +204,7 @@ export default function HomePage() {
             <p className="text-xs font-semibold uppercase tracking-[0.2em] text-crimson-soft">
               Vision
             </p>
-            <p className="banner-title font-display mt-5 text-2xl font-semibold text-white">
+            <p className="banner-title font-display mt-4 text-xl font-semibold text-white sm:mt-5 sm:text-2xl">
               {vision}
             </p>
           </article>
@@ -212,7 +212,7 @@ export default function HomePage() {
             <p className="text-xs font-semibold uppercase tracking-[0.2em] text-green">
               Mission
             </p>
-            <p className="mt-5 text-lg leading-relaxed text-ink/85">{mission}</p>
+            <p className="mt-4 text-base leading-relaxed text-ink/85 sm:mt-5 sm:text-lg">{mission}</p>
             <Link
               href="/entreprise#vision-mission"
               className="mt-8 inline-flex text-sm font-semibold uppercase tracking-[0.12em] text-navy"
@@ -228,7 +228,7 @@ export default function HomePage() {
           <p className="text-xs font-semibold uppercase tracking-[0.22em] text-green">
             Culture d’entreprise
           </p>
-          <h2 className="banner-title font-display mt-3 text-3xl font-bold text-ink sm:text-4xl">
+          <h2 className="banner-title font-display mt-3 text-[1.4rem] font-bold text-ink sm:text-4xl">
             Nos valeurs
           </h2>
           <div className="mt-12 grid gap-x-10 gap-y-10 sm:grid-cols-2 lg:grid-cols-3">
@@ -255,10 +255,10 @@ export default function HomePage() {
             <p className="text-xs font-semibold uppercase tracking-[0.22em] text-green">
               Ingenio Academia
             </p>
-            <h2 className="banner-title font-display mt-3 text-3xl font-bold text-ink sm:text-4xl">
+            <h2 className="banner-title font-display mt-3 text-[1.4rem] font-bold text-ink sm:text-4xl">
               Former pour renforcer les compétences
             </h2>
-            <p className="mt-5 max-w-2xl text-lg leading-relaxed text-ink/85">
+            <p className="mt-4 max-w-2xl text-base leading-relaxed text-ink/85 sm:mt-5 sm:text-lg">
               Formations professionnelles, stages, certification et vérification
               numérique des attestations : le pôle Academia développe les
               compétences techniques et professionnelles.
