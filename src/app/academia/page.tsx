@@ -30,7 +30,7 @@ const sections = [
     text: "Formations professionnelles, ateliers pratiques, séminaires, conférences et webinaires pour renforcer les compétences techniques et managériales.",
     href: "/academia/formations",
     cta: "Voir les formations",
-    image: "/images/formations.jpg",
+    image: "/images/formation.jpeg",
     alt: "Formations Ingenio Academia",
   },
   {
@@ -40,7 +40,7 @@ const sections = [
     text: "Accueil et encadrement des stagiaires académiques et professionnels, avec une mise en pratique directement utile au monde du travail.",
     href: "/academia/stages",
     cta: "Découvrir les stages",
-    image: "/images/stages.jpg",
+    image: "/images/stage.jpeg",
     alt: "Stages Ingenio Academia",
   },
   {
@@ -50,19 +50,19 @@ const sections = [
     text: "Des formateurs issus de l’ingénierie, de l’environnement, du HSE, de la géomatique et de l’énergie, pour transmettre des compétences actionnables.",
     href: "/academia/formateurs",
     cta: "Rencontrer les formateurs",
-    image: "/images/formateurs.jpg",
+    image: "/images/formateur.jpeg",
     alt: "Formateurs Ingenio Academia",
   },
-  {
-    id: "espace-apprenant",
-    eyebrow: "Espace apprenant",
-    title: "Suivre son parcours en ligne",
-    text: "Un espace numérique dédié aux apprenants pour consulter le parcours de formation, les sessions suivies, les attestations et certificats.",
-    href: "/academia/espace-apprenant",
-    cta: "Accéder à l’espace",
-    image: "/images/academia.jpg",
-    alt: "Espace apprenant Academia",
-  },
+  // {
+  //   id: "espace-apprenant",
+  //   eyebrow: "Espace apprenant",
+  //   title: "Suivre son parcours en ligne",
+  //   text: "Un espace numérique dédié aux apprenants pour consulter le parcours de formation, les sessions suivies, les attestations et certificats.",
+  //   href: "/academia/espace-apprenant",
+  //   cta: "Accéder à l’espace",
+  //   image: "/images/academia.jpg",
+  //   alt: "Espace apprenant Academia",
+  // },
 ];
 
 export default function AcademiaPage() {
@@ -135,7 +135,7 @@ export default function AcademiaPage() {
       <section id="certificats" className="scroll-mt-24 border-y border-[var(--line)]">
         <div className="mx-auto grid max-w-7xl items-center gap-10 px-4 py-16 sm:px-6 lg:grid-cols-2 lg:gap-14 lg:px-8">
           <MediaFrame
-            src="/images/certificats.jpg"
+            src="/images/certificat.jpeg"
             alt="Certificats Ingenio Academia"
           />
           <div>
