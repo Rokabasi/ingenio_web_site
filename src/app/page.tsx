@@ -111,8 +111,8 @@ export default function HomePage() {
             <div className="mt-6 h-1 w-20 bg-crimson" />
           </div>
           <div className="space-y-4 text-base leading-relaxed text-ink/85 sm:space-y-5 sm:text-lg">
-            <p>{aboutIntro}</p>
-            <p>{aboutObjective}</p>
+            <p className="text-justify">{aboutIntro}</p>
+            <p className="text-justify">{aboutObjective}</p>
             <Link
               href="/entreprise"
               className="inline-flex items-center gap-2 pt-2 text-sm font-semibold uppercase tracking-[0.12em] text-navy hover:text-navy-mid"
@@ -127,7 +127,7 @@ export default function HomePage() {
         <div className="mx-auto grid max-w-7xl items-center gap-10 px-4 py-14 sm:px-6 lg:grid-cols-2 lg:gap-16 lg:px-8 lg:py-20">
           <div className="relative aspect-[16/10] min-h-[180px] max-w-full overflow-hidden bg-navy sm:min-h-[280px] lg:min-h-0 lg:aspect-[4/3]">
             <Image
-              src="/images/entreprise.jpg"
+              src="/images/entreprises.jpeg"
               alt="Équipe et projets d’ingénierie Ingenio Consulting"
               fill
               className="object-cover object-center"
@@ -204,7 +204,7 @@ export default function HomePage() {
             <p className="text-xs font-semibold uppercase tracking-[0.2em] text-crimson-soft">
               Vision
             </p>
-            <p className="banner-title font-display mt-4 text-xl font-semibold text-white sm:mt-5 sm:text-2xl">
+            <p className="banner-title font-display mt-4 text-md font-semibold text-white sm:mt-5 sm:text-xl">
               {vision}
             </p>
           </article>
