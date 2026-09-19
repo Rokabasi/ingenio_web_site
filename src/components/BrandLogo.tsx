@@ -41,8 +41,8 @@ export function BrandLogo({
       <Image
         src="/logo.png"
         alt="Ingenio Consulting"
-        width={220}
-        height={72}
+        width={100}
+        height={100}
         priority={priority}
         className={`object-contain object-left ${config.image}`}
       />
