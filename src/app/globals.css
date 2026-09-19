@@ -55,7 +55,6 @@
 html {
   scroll-behavior: smooth;
   max-width: 100%;
-  overflow-x: clip;
 }
 
 body {
@@ -64,7 +63,6 @@ body {
   font-family: var(--font-body), system-ui, sans-serif;
   text-rendering: optimizeLegibility;
   max-width: 100%;
-  overflow-x: clip;
 }
 
 main,
@@ -72,6 +70,9 @@ main,
   width: 100%;
   max-width: 100%;
   min-width: 0;
+}
+
+.site-frame {
   overflow-x: clip;
 }
 
@@ -240,7 +241,6 @@ h4,
   isolation: isolate;
   width: 100%;
   max-width: 100%;
-  overflow-x: clip;
 }
 
 .page-shell::before {
@@ -280,21 +280,19 @@ h4,
   background: var(--navy);
   color: #ffffff;
   border-bottom: 1px solid rgba(255, 255, 255, 0.14);
-  /* Ombre + jointure haute pour boucher le micro-gap au scroll mobile */
   box-shadow:
-    0 -24px 0 0 var(--navy),
+    0 -32px 0 0 var(--navy),
     0 8px 28px rgba(13, 23, 48, 0.28);
-  -webkit-backface-visibility: hidden;
-  backface-visibility: hidden;
 }
 
+/* Bouche le micro-gap iOS au overscroll */
 .site-header::before {
   content: "";
   position: absolute;
   left: 0;
   right: 0;
-  top: -48px;
-  height: 48px;
+  top: -64px;
+  height: 64px;
   background: var(--navy);
   pointer-events: none;
 }
@@ -302,14 +300,22 @@ h4,
 .site-header__bar {
   position: relative;
   z-index: 60;
-  padding-top: env(safe-area-inset-top, 0px);
+  /* padding top logo/barre : base + safe-area (ne pas écraser à 0) */
+  padding-top: calc(0.5rem + env(safe-area-inset-top, 0px));
+  padding-bottom: 0.5rem;
+}
+
+@media (min-width: 640px) {
+  .site-header__bar {
+    padding-top: calc(0.625rem + env(safe-area-inset-top, 0px));
+    padding-bottom: 0.625rem;
+  }
 }
 
 .site-header-spacer {
   flex-shrink: 0;
   width: 100%;
   pointer-events: none;
-  visibility: hidden;
 }
 
 .site-header a,
@@ -530,10 +536,6 @@ h4,
   animation: page-in 0.55s cubic-bezier(0.22, 1, 0.36, 1) both;
 }
 
-.site-frame.is-ready .site-header {
-  animation: header-in 0.45s ease both;
-}
-
 /* Apparition douce opt-in — jamais d’opacité 0 forcée sur toutes les sections */
 .reveal-pending {
   opacity: 0;
@@ -637,7 +639,6 @@ h4,
   .site-loader__bar::after,
   .site-frame.is-pending,
   .site-frame.is-ready,
-  .site-frame.is-ready .site-header,
   .reveal,
   .reveal-delay-1,
   .reveal-delay-2,

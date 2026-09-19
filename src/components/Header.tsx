@@ -104,7 +104,7 @@ export function Header() {
       <header className="site-header">
         <div
           ref={barRef}
-          className="site-header__bar mx-auto flex max-w-7xl items-center justify-between gap-2 px-3 py-2 sm:gap-3 sm:px-6 sm:py-2.5 lg:px-8"
+          className="site-header__bar mx-auto flex max-w-7xl items-center justify-between gap-2 px-3 sm:gap-3 sm:px-6 lg:px-8"
         >
           <div className="min-w-0 shrink">
             <BrandLogo priority size="header" />
