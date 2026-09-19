@@ -536,18 +536,20 @@ h4,
   animation: page-in 0.55s cubic-bezier(0.22, 1, 0.36, 1) both;
 }
 
-/* Apparition douce opt-in — jamais d’opacité 0 forcée sur toutes les sections */
+/* Apparition au scroll — lente, une seule fois */
 .reveal-pending {
   opacity: 0;
-  transform: translate3d(0, 20px, 0);
-  transition:
-    opacity 0.8s cubic-bezier(0.22, 1, 0.36, 1),
-    transform 0.8s cubic-bezier(0.22, 1, 0.36, 1);
+  transform: translate3d(0, 40px, 0);
+  /* Pas de transition ici : évite le flash inverse au montage */
 }
 
 .reveal-pending.is-inview {
   opacity: 1;
   transform: translate3d(0, 0, 0);
+  transition:
+    opacity 1.2s cubic-bezier(0.22, 1, 0.36, 1),
+    transform 1.35s cubic-bezier(0.22, 1, 0.36, 1);
+  will-change: opacity, transform;
 }
 
 .reveal {
@@ -645,6 +647,16 @@ h4,
   .reveal-delay-3,
   .draw-line,
   .reveal-pending,
+  .reveal-pending.is-inview {
+    animation: none !important;
+    transition: none !important;
+    transition-delay: 0s !important;
+    opacity: 1 !important;
+    transform: none !important;
+    visibility: visible !important;
+    will-change: auto !important;
+  }
+
   .mobile-nav-icon span,
   .mobile-nav-backdrop,
   .mobile-nav-drawer,

@@ -2,23 +2,30 @@
 
 import Image from "next/image";
 import { usePathname } from "next/navigation";
-import { useEffect, useState } from "react";
+import { useEffect, useLayoutEffect, useState } from "react";
+
+const REVEAL_SELECTOR = "main > section, main > article";
 
 function bindSectionReveals() {
   const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-  const sections = Array.from(
-    document.querySelectorAll<HTMLElement>("main > section"),
+  const nodes = Array.from(
+    document.querySelectorAll<HTMLElement>(REVEAL_SELECTOR),
   );
 
-  // Première section toujours visible (hero)
-  sections.forEach((node, index) => {
+  nodes.forEach((node, index) => {
+    node.classList.remove("is-inview", "reveal-pending");
+    node.style.removeProperty("transition-delay");
+
     if (index === 0) {
+      // Hero / première section : visible immédiatement
       node.classList.add("is-inview");
-      node.classList.remove("reveal-pending");
+      return;
     }
+
+    node.classList.add("reveal-pending");
   });
 
-  const targets = sections.filter((_, index) => index > 0);
+  const targets = nodes.filter((_, index) => index > 0);
 
   if (reduce) {
     targets.forEach((node) => {
@@ -28,35 +35,56 @@ function bindSectionReveals() {
     return () => {};
   }
 
-  targets.forEach((node) => {
-    if (!node.classList.contains("is-inview")) {
-      node.classList.add("reveal-pending");
-    }
-  });
+  let staggerIndex = 0;
 
   const observer = new IntersectionObserver(
     (entries) => {
-      for (const entry of entries) {
-        if (!entry.isIntersecting) continue;
-        entry.target.classList.add("is-inview");
-        entry.target.classList.remove("reveal-pending");
-        observer.unobserve(entry.target);
+      const visible = entries
+        .filter((entry) => entry.isIntersecting)
+        .sort(
+          (a, b) => a.boundingClientRect.top - b.boundingClientRect.top,
+        );
+
+      for (const entry of visible) {
+        const el = entry.target as HTMLElement;
+        if (el.classList.contains("is-inview")) {
+          observer.unobserve(el);
+          continue;
+        }
+
+        // Décalage léger si plusieurs blocs entrent ensemble (premier écran)
+        el.style.transitionDelay = `${staggerIndex * 110}ms`;
+        staggerIndex += 1;
+
+        // Force reflow puis apparition (transition CSS lente)
+        void el.offsetWidth;
+        el.classList.add("is-inview");
+        observer.unobserve(el);
+
+        const clearDelay = () => {
+          el.style.removeProperty("transition-delay");
+          el.removeEventListener("transitionend", clearDelay);
+        };
+        el.addEventListener("transitionend", clearDelay);
       }
     },
-    { threshold: 0.08, rootMargin: "0px 0px -4% 0px" },
+    {
+      threshold: 0.14,
+      rootMargin: "0px 0px -10% 0px",
+    },
   );
 
-  targets.forEach((node) => {
-    if (!node.classList.contains("is-inview")) observer.observe(node);
-  });
+  targets.forEach((node) => observer.observe(node));
 
-  // Filet de sécurité : rien ne reste invisible
+  // Filet a11y uniquement (ne coupe plus l’effet au scroll)
   const failSafe = window.setTimeout(() => {
     targets.forEach((node) => {
-      node.classList.add("is-inview");
-      node.classList.remove("reveal-pending");
+      if (!node.classList.contains("is-inview")) {
+        node.style.removeProperty("transition-delay");
+        node.classList.add("is-inview");
+      }
     });
-  }, 1800);
+  }, 25000);
 
   return () => {
     window.clearTimeout(failSafe);
@@ -94,18 +122,14 @@ export function SmoothMotion({ children }: { children: React.ReactNode }) {
     return () => window.removeEventListener("load", finish);
   }, []);
 
-  useEffect(() => {
+  // Appliquer reveal-pending avant paint pour éviter le flash
+  useLayoutEffect(() => {
     if (!ready) return;
 
     let cleanup: () => void = () => {};
-    const id = window.requestAnimationFrame(() => {
-      cleanup = bindSectionReveals();
-    });
+    cleanup = bindSectionReveals();
 
-    return () => {
-      window.cancelAnimationFrame(id);
-      cleanup();
-    };
+    return () => cleanup();
   }, [ready, pathname]);
 
   return (
@@ -129,7 +153,9 @@ export function SmoothMotion({ children }: { children: React.ReactNode }) {
           </div>
         </div>
       ) : null}
-      <div className={`site-frame w-full max-w-full overflow-x-clip ${ready ? "is-ready" : "is-pending"}`}>
+      <div
+        className={`site-frame w-full max-w-full overflow-x-clip ${ready ? "is-ready" : "is-pending"}`}
+      >
         {children}
       </div>
     </>
