@@ -536,20 +536,18 @@ h4,
   animation: page-in 0.55s cubic-bezier(0.22, 1, 0.36, 1) both;
 }
 
-/* Apparition au scroll — lente, une seule fois */
+/* Apparition au scroll — lente, douce, cohérente */
 .reveal-pending {
   opacity: 0;
-  transform: translate3d(0, 40px, 0);
-  /* Pas de transition ici : évite le flash inverse au montage */
+  transform: translate3d(0, 22px, 0);
 }
 
 .reveal-pending.is-inview {
   opacity: 1;
   transform: translate3d(0, 0, 0);
   transition:
-    opacity 1.2s cubic-bezier(0.22, 1, 0.36, 1),
-    transform 1.35s cubic-bezier(0.22, 1, 0.36, 1);
-  will-change: opacity, transform;
+    opacity 1.9s cubic-bezier(0.33, 0, 0.15, 1),
+    transform 2.1s cubic-bezier(0.33, 0, 0.15, 1);
 }
 
 .reveal {
@@ -654,7 +652,6 @@ h4,
     opacity: 1 !important;
     transform: none !important;
     visibility: visible !important;
-    will-change: auto !important;
   }
 
   .mobile-nav-icon span,

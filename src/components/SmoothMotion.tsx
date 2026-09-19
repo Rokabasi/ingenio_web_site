@@ -6,6 +6,12 @@ import { useEffect, useLayoutEffect, useState } from "react";
 
 const REVEAL_SELECTOR = "main > section, main > article";
 
+function scrollToTop() {
+  window.scrollTo({ top: 0, left: 0, behavior: "auto" });
+  document.documentElement.scrollTop = 0;
+  document.body.scrollTop = 0;
+}
+
 function bindSectionReveals() {
   const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
   const nodes = Array.from(
@@ -17,7 +23,6 @@ function bindSectionReveals() {
     node.style.removeProperty("transition-delay");
 
     if (index === 0) {
-      // Hero / première section : visible immédiatement
       node.classList.add("is-inview");
       return;
     }
@@ -35,7 +40,8 @@ function bindSectionReveals() {
     return () => {};
   }
 
-  let staggerIndex = 0;
+  let batch = 0;
+  let batchTimer: ReturnType<typeof setTimeout> | null = null;
 
   const observer = new IntersectionObserver(
     (entries) => {
@@ -52,16 +58,22 @@ function bindSectionReveals() {
           continue;
         }
 
-        // Décalage léger si plusieurs blocs entrent ensemble (premier écran)
-        el.style.transitionDelay = `${staggerIndex * 110}ms`;
-        staggerIndex += 1;
+        const delay = Math.min(batch, 4) * 160;
+        el.style.transitionDelay = `${delay}ms`;
+        batch += 1;
 
-        // Force reflow puis apparition (transition CSS lente)
-        void el.offsetWidth;
-        el.classList.add("is-inview");
+        if (batchTimer) clearTimeout(batchTimer);
+        batchTimer = setTimeout(() => {
+          batch = 0;
+        }, 500);
+
+        requestAnimationFrame(() => {
+          el.classList.add("is-inview");
+        });
         observer.unobserve(el);
 
-        const clearDelay = () => {
+        const clearDelay = (event: TransitionEvent) => {
+          if (event.propertyName !== "opacity") return;
           el.style.removeProperty("transition-delay");
           el.removeEventListener("transitionend", clearDelay);
         };
@@ -69,14 +81,13 @@ function bindSectionReveals() {
       }
     },
     {
-      threshold: 0.14,
-      rootMargin: "0px 0px -10% 0px",
+      threshold: 0.1,
+      rootMargin: "0px 0px -8% 0px",
     },
   );
 
   targets.forEach((node) => observer.observe(node));
 
-  // Filet a11y uniquement (ne coupe plus l’effet au scroll)
   const failSafe = window.setTimeout(() => {
     targets.forEach((node) => {
       if (!node.classList.contains("is-inview")) {
@@ -84,10 +95,11 @@ function bindSectionReveals() {
         node.classList.add("is-inview");
       }
     });
-  }, 25000);
+  }, 30000);
 
   return () => {
     window.clearTimeout(failSafe);
+    if (batchTimer) clearTimeout(batchTimer);
     observer.disconnect();
   };
 }
@@ -96,6 +108,17 @@ export function SmoothMotion({ children }: { children: React.ReactNode }) {
   const pathname = usePathname();
   const [ready, setReady] = useState(false);
   const [exit, setExit] = useState(false);
+
+  useEffect(() => {
+    if ("scrollRestoration" in history) {
+      history.scrollRestoration = "manual";
+    }
+  }, []);
+
+  // Chaque changement d’onglet / route → haut de page
+  useEffect(() => {
+    scrollToTop();
+  }, [pathname]);
 
   useEffect(() => {
     const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
@@ -122,13 +145,10 @@ export function SmoothMotion({ children }: { children: React.ReactNode }) {
     return () => window.removeEventListener("load", finish);
   }, []);
 
-  // Appliquer reveal-pending avant paint pour éviter le flash
   useLayoutEffect(() => {
     if (!ready) return;
 
-    let cleanup: () => void = () => {};
-    cleanup = bindSectionReveals();
-
+    const cleanup = bindSectionReveals();
     return () => cleanup();
   }, [ready, pathname]);
 

@@ -76,18 +76,6 @@ export const domains: Domain[] = [
         summary:
           "Pilotage, coordination et management de projets d’ingénierie et de construction.",
       },
-      {
-        slug: "etudes-prix",
-        title: "Études de prix & Devis",
-        summary:
-          "Études de prix, estimations et élaboration de devis techniques pour vos projets.",
-      },
-      {
-        slug: "equipe",
-        title: "Notre équipe",
-        summary:
-          "Ingénieurs en génie civil, techniciens et chefs de projet mobilisés selon la nature de chaque mission.",
-      },
     ],
   },
   {
@@ -111,22 +99,11 @@ export const domains: Domain[] = [
     services: [
       {
         slug: "eies",
-        title: "EIES",
+        title: "EIES, EES & NIE",
         summary:
           "Études d’Impact Environnemental et Social pour anticiper et maîtriser les impacts des projets.",
       },
-      {
-        slug: "ees",
-        title: "EES",
-        summary:
-          "Évaluations Environnementales et Sociales adaptées aux exigences des projets et des bailleurs.",
-      },
-      {
-        slug: "nie",
-        title: "NIE",
-        summary:
-          "Notices d’Impact Environnemental pour les projets relevant d’une procédure simplifiée.",
-      },
+      
       {
         slug: "pges",
         title: "PGES",
@@ -157,12 +134,7 @@ export const domains: Domain[] = [
         summary:
           "Plans et programmes de gestion des déchets adaptés aux activités et aux territoires.",
       },
-      {
-        slug: "equipe",
-        title: "Notre équipe",
-        summary:
-          "Environnementalistes, spécialistes HSE/QHSE et consultants mobilisés sur vos missions.",
-      },
+      
     ],
   },
   {
@@ -190,24 +162,14 @@ export const domains: Domain[] = [
         summary:
           "Analyse des besoins énergétiques et dimensionnement des installations adaptées.",
       },
-      {
-        slug: "devis",
-        title: "Devis",
-        summary:
-          "Élaboration de devis et propositions techniques pour vos projets énergétiques.",
-      },
+      
       {
         slug: "solaire",
         title: "Installations solaires",
         summary:
           "Conception, installation et mise en service de systèmes photovoltaïques.",
       },
-      {
-        slug: "electrique",
-        title: "Installations électriques",
-        summary:
-          "Solutions d’alimentation électrique adaptées aux différents besoins.",
-      },
+      
       {
         slug: "maintenance",
         title: "Maintenance & entretien",
@@ -227,22 +189,10 @@ export const domains: Domain[] = [
           "Solutions de production de biogaz à partir de ressources organiques disponibles.",
       },
       {
-        slug: "methanisation",
-        title: "Méthanisation",
-        summary:
-          "Conception et dimensionnement d’installations de méthanisation.",
-      },
-      {
         slug: "valorisation",
         title: "Valorisation énergétique",
         summary:
           "Valorisation énergétique des effluents, résidus organiques et sous-produits.",
-      },
-      {
-        slug: "equipe",
-        title: "Notre équipe",
-        summary:
-          "Spécialistes des énergies et techniciens dédiés aux projets renouvelables.",
       },
     ],
   },
@@ -271,18 +221,7 @@ export const domains: Domain[] = [
         summary:
           "Études d’assainissement, conception et dimensionnement des ouvrages.",
       },
-      {
-        slug: "fosses-biofiltres",
-        title: "Fosses biofiltres",
-        summary:
-          "Conception et réalisation de fosses biofiltres adaptées aux besoins locaux.",
-      },
-      {
-        slug: "autonome",
-        title: "Assainissement autonome",
-        summary:
-          "Systèmes d’assainissement autonomes pour habitats et équipements isolés.",
-      },
+      
       {
         slug: "solutions-ecologiques",
         title: "Solutions sanitaires écologiques",
@@ -292,12 +231,6 @@ export const domains: Domain[] = [
           "Nous concevons des solutions de traitement des eaux usées visant à réduire les impacts sanitaires et environnementaux.",
           "Lorsque les conditions techniques et sanitaires le permettent, nous accompagnons également la valorisation et la réutilisation des eaux traitées.",
         ],
-      },
-      {
-        slug: "boues",
-        title: "Gestion des boues de vidange",
-        summary:
-          "Gestion et traitement des boues pour protéger la santé publique et l’environnement.",
       },
       {
         slug: "devis",

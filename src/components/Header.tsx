@@ -18,6 +18,12 @@ function isActive(pathname: string, href: string) {
   return pathname === href || pathname.startsWith(`${href}/`);
 }
 
+function goTop() {
+  window.scrollTo({ top: 0, left: 0, behavior: "auto" });
+  document.documentElement.scrollTop = 0;
+  document.body.scrollTop = 0;
+}
+
 export function Header() {
   const [mobileOpen, setMobileOpen] = useState(false);
   const [barHeight, setBarHeight] = useState(56);
@@ -120,6 +126,7 @@ export function Header() {
                 <Link
                   key={item.href}
                   href={item.href}
+                  onClick={goTop}
                   className={`rounded-sm px-2.5 py-2 text-[0.78rem] font-semibold tracking-wide transition-colors ${
                     active ? "bg-white/15" : "hover:bg-white/15"
                   }`}
@@ -133,6 +140,7 @@ export function Header() {
           <div className="flex shrink-0 items-center gap-2">
             <Link
               href="/contact/devis"
+              onClick={goTop}
               className="header-cta hidden rounded-sm px-3 py-2.5 text-[0.7rem] font-bold uppercase tracking-[0.08em] md:inline-flex"
             >
               <span className="lg:hidden">Devis</span>
@@ -187,7 +195,10 @@ export function Header() {
                   key={item.href}
                   href={item.href}
                   tabIndex={mobileOpen ? 0 : -1}
-                  onClick={() => setMobileOpen(false)}
+                  onClick={() => {
+                    setMobileOpen(false);
+                    goTop();
+                  }}
                   style={
                     {
                       "--nav-i": index,
@@ -203,7 +214,10 @@ export function Header() {
               <Link
                 href="/contact/devis"
                 tabIndex={mobileOpen ? 0 : -1}
-                onClick={() => setMobileOpen(false)}
+                onClick={() => {
+                  setMobileOpen(false);
+                  goTop();
+                }}
                 style={
                   {
                     "--nav-i": headerNav.length,

@@ -36,6 +36,24 @@ const domainImages: Record<
 const domainImageFrame =
   "aspect-[3/2] w-full ring-1 ring-[var(--line)] shadow-[0_10px_32px_rgba(21,36,71,0.08)]";
 
+/** Aperçu synthétique : 1 phrase d’intro + prestations clés (titres seuls) */
+function getDomainPreview(domain: (typeof domains)[number]) {
+  const intro = domain.description[0] ?? domain.summary;
+  const shortIntro =
+    intro.length > 180 ? `${intro.slice(0, 177).trimEnd()}…` : intro;
+
+  const items =
+    domain.services.length > 0
+      ? domain.services.map((s) => s.title)
+      : domain.highlights;
+
+  return {
+    intro: shortIntro,
+    items: items.slice(0, 6),
+    moreCount: Math.max(0, items.length - 6),
+  };
+}
+
 const projects = [
   {
     title: "Études d’infrastructures et suivi de travaux",
@@ -76,71 +94,59 @@ function DomainContent({
   domain: (typeof domains)[number];
   compact?: boolean;
 }) {
+  const preview = getDomainPreview(domain);
+
   return (
     <div className="min-w-0">
-      <p className="text-xs font-semibold uppercase tracking-[0.16em] text-green">
+      <p className="text-[0.65rem] font-semibold uppercase tracking-[0.16em] text-green sm:text-xs">
         {domain.eyebrow}
       </p>
       <h3
         className={`banner-title font-display mt-2 font-bold text-ink ${
           compact
             ? "text-[1.2rem] sm:text-2xl"
-            : "text-[1.35rem] sm:text-3xl lg:text-4xl"
+            : "text-[1.35rem] sm:text-3xl lg:text-[2rem]"
         }`}
       >
-        {domain.title}
+        {domain.shortTitle}
       </h3>
       <p
-        className={`mt-2.5 text-stone sm:mt-3 ${
-          compact
-            ? "max-w-xl text-sm sm:text-base"
-            : "max-w-2xl text-[0.9375rem] sm:text-lg"
+        className={`mt-2.5 font-medium text-ink/85 sm:mt-3 ${
+          compact ? "max-w-xl text-sm sm:text-base" : "max-w-xl text-[0.95rem] sm:text-base"
         }`}
       >
         {domain.summary}
       </p>
-      <Link
-        href={`/domaines/${domain.slug}`}
-        className="mt-5 inline-flex text-sm font-semibold uppercase tracking-[0.12em] text-navy hover:text-navy-mid"
+      <p
+        className={`mt-3 leading-relaxed text-stone ${
+          compact ? "max-w-xl text-sm" : "max-w-xl text-sm sm:text-[0.95rem]"
+        }`}
       >
-        Voir le domaine →
-      </Link>
+        {preview.intro}
+      </p>
 
-      {domain.services.length > 0 ? (
+      <div className="mt-6">
+        <p className="text-[0.65rem] font-semibold uppercase tracking-[0.14em] text-crimson sm:text-xs">
+          Prestations clés
+        </p>
         <ul
-          className={`mt-6 grid gap-2.5 ${compact ? "sm:grid-cols-2" : "sm:grid-cols-2 lg:grid-cols-2"}`}
+          className={`mt-3 flex flex-wrap gap-2 ${compact ? "" : "sm:gap-2.5"}`}
         >
-          <li>
-            <Link
-              href={`/domaines/${domain.slug}`}
-              className="block border border-[var(--line)] bg-white/80 px-3.5 py-2.5 text-sm font-medium text-ink transition hover:border-navy/30 hover:bg-white"
-            >
-              Présentation
-            </Link>
-          </li>
-          {domain.services.map((service) => (
-            <li key={service.slug}>
-              <Link
-                href={`/domaines/${domain.slug}/${service.slug}`}
-                className="block border border-[var(--line)] bg-white/80 px-3.5 py-2.5 text-sm font-medium text-ink transition hover:border-navy/30 hover:bg-white"
-              >
-                {service.title}
-              </Link>
-            </li>
-          ))}
-        </ul>
-      ) : (
-        <ul className="mt-6 grid gap-2.5 sm:grid-cols-2">
-          {domain.highlights.map((item) => (
+          {preview.items.map((item) => (
             <li
               key={item}
-              className="border-l-2 border-crimson bg-white/70 px-3.5 py-2.5 text-sm text-ink"
+              className="border border-[var(--line)] bg-white/80 px-3 py-1.5 text-xs font-medium text-ink sm:text-sm"
             >
               {item}
             </li>
           ))}
+          {preview.moreCount > 0 ? (
+            <li className="px-2 py-1.5 text-xs font-medium text-stone sm:text-sm">
+              +{preview.moreCount} autres
+            </li>
+          ) : null}
         </ul>
-      )}
+      </div>
     </div>
   );
 }
@@ -151,24 +157,23 @@ export default function ExpertisePage() {
       <PageHero
         eyebrow="Expertise"
         title="Expertise et domaines"
-        description="Une lecture claire de nos expertises, de nos prestations et des typologies de projets réalisés."
+        description="Une vue d’ensemble claire de nos métiers, prestations et typologies de projets."
         crumbs={[
           { label: "Accueil", href: "/" },
           { label: "Expertise et domaines" },
         ]}
       />
 
-      <section className="mx-auto max-w-7xl px-4 py-14 sm:px-6 sm:py-16 lg:px-8 lg:py-20">
+      <section className="mx-auto max-w-7xl px-4 py-12 sm:px-6 sm:py-16 lg:px-8 lg:py-20">
         <p className="text-xs font-semibold uppercase tracking-[0.2em] text-green">
           Nos domaines
         </p>
         <h2 className="banner-title font-display mt-3 text-[1.4rem] font-bold text-ink sm:text-4xl">
           Une offre structurée par métier
         </h2>
-        <p className="mt-3 max-w-3xl text-base leading-relaxed text-ink/80 sm:mt-4 sm:text-lg">
-          Chaque domaine regroupe des prestations ciblées, de la présentation
-          jusqu’à l’équipe mobilisée, pour répondre aux enjeux techniques,
-          environnementaux et énergétiques de vos projets.
+        <p className="mt-3 max-w-2xl text-base leading-relaxed text-ink/80 sm:mt-4 sm:text-lg">
+          Sept domaines complémentaires, présentés de façon synthétique pour
+          identifier rapidement l’expertise adaptée à votre projet.
         </p>
       </section>
 
@@ -188,7 +193,7 @@ export default function ExpertisePage() {
           >
             <div
               className={`mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 ${
-                featured ? "py-12 sm:py-16 lg:py-20" : "py-10 sm:py-12 lg:py-14"
+                featured ? "py-12 sm:py-16 lg:py-16" : "py-10 sm:py-12 lg:py-14"
               }`}
             >
               {featured ? (
@@ -202,9 +207,9 @@ export default function ExpertisePage() {
                   <DomainContent domain={domain} />
                 </div>
               ) : (
-                <div className="grid items-center gap-8 lg:grid-cols-[1fr_280px] lg:gap-12">
+                <div className="grid items-center gap-8 lg:grid-cols-[1fr_minmax(0,260px)] lg:gap-12">
                   <DomainContent domain={domain} compact />
-                  <div className="mx-auto w-full max-w-[280px] lg:mx-0 lg:max-w-none">
+                  <div className="mx-auto w-full max-w-[260px] lg:mx-0 lg:max-w-none">
                     <MediaFrame
                       src={image.src}
                       alt={domain.shortTitle}
@@ -220,7 +225,7 @@ export default function ExpertisePage() {
       })}
 
       <section className="border-y border-[var(--line)] bg-white/50">
-        <div className="mx-auto max-w-7xl px-4 py-16 sm:px-6 lg:px-8">
+        <div className="mx-auto max-w-7xl px-4 py-14 sm:px-6 sm:py-16 lg:px-8">
           <p className="text-xs font-semibold uppercase tracking-[0.2em] text-green">
             Réalisations
           </p>
@@ -231,7 +236,7 @@ export default function ExpertisePage() {
             Une sélection de typologies d’interventions menées par Ingenio
             Consulting.
           </p>
-          <div className="mt-10 grid gap-8 sm:grid-cols-2 lg:grid-cols-3">
+          <div className="mt-10 grid gap-6 sm:grid-cols-2 lg:grid-cols-3 lg:gap-8">
             {projects.map((project) => (
               <article
                 key={project.title}
@@ -240,16 +245,16 @@ export default function ExpertisePage() {
                 <MediaFrame
                   src={project.image}
                   alt={project.title}
-                  className={`${domainImageFrame} aspect-[3/2]`}
+                  className="aspect-[16/10] w-full"
                 />
                 <div className="p-5">
                   <p className="text-xs font-semibold uppercase tracking-[0.16em] text-moss">
                     {project.domain}
                   </p>
-                  <h3 className="banner-title font-display mt-2 text-xl font-semibold text-ink">
+                  <h3 className="banner-title font-display mt-2 text-lg font-semibold text-ink sm:text-xl">
                     {project.title}
                   </h3>
-                  <p className="mt-3 text-sm leading-relaxed text-stone">
+                  <p className="mt-2 text-sm leading-relaxed text-stone">
                     {project.text}
                   </p>
                 </div>
