@@ -50,6 +50,40 @@ const partnerTypes = [
   },
 ];
 
+const imageShell =
+  "overflow-hidden bg-navy ring-1 ring-navy/20 shadow-[0_20px_48px_rgba(21,36,71,0.14)]";
+
+function FramedMedia({
+  src,
+  alt,
+  className = "",
+  imageClassName = "",
+}: {
+  src: string;
+  alt: string;
+  className?: string;
+  imageClassName?: string;
+}) {
+  return (
+    <figure className="min-w-0">
+      <div className="bg-white p-2 shadow-[0_16px_40px_rgba(21,36,71,0.1)] ring-1 ring-navy/12 sm:p-2.5">
+        <div className={`relative ${imageShell}`}>
+          <MediaFrame
+            src={src}
+            alt={alt}
+            imageClassName={imageClassName}
+            className={className}
+          />
+          <span
+            className="pointer-events-none absolute bottom-0 left-0 z-[1] h-1 w-16 bg-crimson sm:w-20"
+            aria-hidden
+          />
+        </div>
+      </div>
+    </figure>
+  );
+}
+
 export default function EntreprisePage() {
   return (
     <>
@@ -78,17 +112,29 @@ export default function EntreprisePage() {
               <p>{aboutObjective}</p>
             </ContentProse>
           </div>
-          <MediaFrame
-            src="/images/entreprise.jpg"
+          <FramedMedia
+            src="/images/entreprisesss.jpeg"
             alt="Ingenio Consulting — équipe et conseil"
+            className="aspect-[4/3]"
           />
         </div>
       </section>
 
-      <MediaBand
-        src="/images/environnement.jpg"
-        alt="Environnement et développement durable"
-      />
+      <div className="mx-auto max-w-7xl px-4 py-4 sm:px-6 lg:px-8">
+        <div className="bg-white p-2 shadow-[0_16px_40px_rgba(21,36,71,0.1)] ring-1 ring-navy/12 sm:p-2.5">
+          <div className={`relative ${imageShell}`}>
+            <MediaBand
+              src="/images/environnement.jpg"
+              alt="Environnement et développement durable"
+              className="h-48 sm:h-60 lg:h-72"
+            />
+            <span
+              className="pointer-events-none absolute bottom-0 left-0 z-[1] h-1 w-20 bg-crimson"
+              aria-hidden
+            />
+          </div>
+        </div>
+      </div>
 
       <section id="vision-mission" className="border-y border-[var(--line)] bg-white/40">
         <div className="mx-auto max-w-7xl scroll-mt-24 px-4 py-16 sm:px-6 lg:px-8">
@@ -160,8 +206,8 @@ export default function EntreprisePage() {
               Détail de l’expertise →
             </Link>
           </div>
-          <MediaFrame
-            src="/images/energie.jpg"
+          <FramedMedia
+            src="/images/ingenio.jpeg"
             alt="Énergies renouvelables et ingénierie"
             className="aspect-[16/11]"
           />
@@ -183,7 +229,7 @@ export default function EntreprisePage() {
         <div className="mx-auto max-w-7xl scroll-mt-24 px-4 py-16 sm:px-6 lg:px-8">
           <div className="grid items-start gap-12 lg:grid-cols-2 lg:gap-16">
             <div>
-              <MediaFrame
+              <FramedMedia
                 src="/images/hero-btp.jpg"
                 alt="Organisation projets et chantiers"
                 className="mb-8 aspect-[16/10]"
@@ -227,7 +273,7 @@ export default function EntreprisePage() {
       <section id="partenaires" className="mx-auto max-w-7xl scroll-mt-24 px-4 py-16 sm:px-6 lg:px-8 lg:py-20">
         <div className="grid gap-10 lg:grid-cols-[0.95fr_1.05fr] lg:gap-16">
           <div>
-            <MediaFrame
+            <FramedMedia
               src="/images/projets.jpg"
               alt="Partenariats et projets collaboratifs"
               className="mb-8 aspect-[16/10]"

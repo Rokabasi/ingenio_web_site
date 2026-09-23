@@ -9,7 +9,9 @@ type MediaBandProps = {
 /** Bandeau image plein largeur pour ancrer le visuel entreprise. */
 export function MediaBand({ src, alt, className = "" }: MediaBandProps) {
   return (
-    <div className={`relative h-48 w-full overflow-hidden sm:h-64 lg:h-72 ${className}`}>
+    <div
+      className={`relative h-48 w-full overflow-hidden bg-navy sm:h-64 lg:h-72 ${className}`}
+    >
       <Image
         src={src}
         alt={alt}
@@ -35,20 +37,19 @@ export function MediaFrame({
   className = "",
   imageClassName = "",
 }: MediaFrameProps) {
-  const hasSize =
-    /\b(aspect-|h-|min-h-|max-h-|w-|max-w-)/.test(className);
+  const hasSize = /\b(aspect-|h-|min-h-|max-h-)/.test(className);
   const defaultSize = hasSize ? "" : "aspect-[4/3]";
 
   return (
     <div
-      className={`relative max-w-full min-w-0 overflow-hidden bg-navy ${defaultSize} ${className}`}
+      className={`relative w-full min-w-0 overflow-hidden bg-navy ${defaultSize} ${className}`}
     >
       <Image
         src={src}
         alt={alt}
         fill
         className={`object-cover object-center ${imageClassName}`}
-        sizes="(max-width: 768px) 100vw, 50vw"
+        sizes="(max-width: 1024px) 100vw, 50vw"
       />
     </div>
   );

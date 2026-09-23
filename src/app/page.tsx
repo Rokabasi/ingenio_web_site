@@ -271,7 +271,7 @@ export default function HomePage() {
                 Découvrir Academia
               </Link>
               <Link
-                href="/academia/verification"
+                href="/"
                 className="inline-flex w-full items-center justify-center rounded-sm border border-navy/25 px-5 py-3 text-sm font-semibold uppercase tracking-[0.1em] text-navy hover:border-navy/50 sm:w-auto"
               >
                 Vérifier un certificat

@@ -167,32 +167,11 @@ export default function AcademiaPage() {
               délivre des attestations et certificats authentifiables.
             </p>
             <Link
-              href="/academia/certificats"
+              href="/academia"
               className="mt-6 inline-flex w-full items-center justify-center rounded-sm bg-navy px-5 py-3 text-xs font-bold uppercase tracking-[0.08em] text-white hover:bg-navy-mid sm:mt-8 sm:w-auto sm:text-sm sm:tracking-[0.1em]"
             >
               En savoir plus
             </Link>
-          </div>
-        </div>
-      </section>
-
-      <section id="verification" className="scroll-mt-24 bg-mist">
-        <div className="mx-auto max-w-7xl px-4 py-10 sm:px-6 sm:py-16 lg:px-8 lg:py-20">
-          <div className="grid gap-8 lg:grid-cols-[1fr_1fr] lg:items-start lg:gap-14">
-            <div className="min-w-0">
-              <p className="text-[0.65rem] font-semibold uppercase tracking-[0.16em] text-green sm:text-xs sm:tracking-[0.2em]">
-                Vérification QR
-              </p>
-              <h2 className="banner-title font-display mt-2.5 text-[1.35rem] font-bold text-ink sm:mt-3 sm:text-3xl">
-                Authentifier un certificat
-              </h2>
-              <p className="mt-3.5 text-[0.9375rem] leading-relaxed text-ink/80 sm:mt-5 sm:text-lg">
-                Vérifiez l’authenticité d’un certificat ou d’une attestation
-                délivré(e) par Ingenio Academia via le code figurant sur le
-                document.
-              </p>
-            </div>
-            <VerificationForm />
           </div>
         </div>
       </section>
